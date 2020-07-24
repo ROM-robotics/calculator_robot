@@ -1,29 +1,31 @@
-#/usr/bin/env python
+#!/usr/bin/env python3
 import sys
 from math import pi
 def main():
-    print("===================================================")
-    print(" 1) Calculate RobotVelocity to wheel rpm ")
-    print(" 2) PID control ")
-    print(" 3) Calculate actual rpm to actual RobotVelocity")
-    print("===================================================")
-    choice = input("Enter : ")
+    
+        print("===================================================")
+        print(" 1) Calculate RobotVelocity to wheel rpm ")
+        print(" 2) Ziegler Nichols PID Gains ")
+        print(" 3) Calculate actual rpm to actual RobotVelocity")
+        print("===================================================")
+        choice = int(input("Enter : "))
 
-    if(choice == 1):
-        robotVel2WheelRPM()
-    elif(choice == 2):
-        pidControl()
-    elif(choice == 3):
-        act_rpm_to_act_robot_vel()
-    else:
-        sys.exit()
+
+        if(choice == 1):
+            robotVel2WheelRPM()
+        elif(choice == 2):
+            ZNpidControl()
+        elif(choice == 3):
+            act_rpm_to_act_robot_vel()
+        else:
+            sys.exit()
 
 def act_rpm_to_act_robot_vel():
-    Vr = input(" Right wheel              ( rpm )  : ")
-    Vl = input(" Left wheel               ( rpm )  : ")
-    L_ = input(" Distance between 2 wheels( cm  )  : ")
-    d_ = input(" Wheel Diameter           ( cm  )  : ")
-    dt = input(" Time difference                   : ")
+    Vr = float(input(" Right wheel              ( rpm )  : "))
+    Vl = float(input(" Left wheel               ( rpm )  : "))
+    L_ = float(input(" Distance between 2 wheels( cm  )  : "))
+    d_ = float(input(" Wheel Diameter           ( cm  )  : "))
+    dt = float(input(" Time difference                   : "))
 
     L = 1.0 * cm2Meter(L_)
     d = 1.0 * cm2Meter(d_)
@@ -73,10 +75,10 @@ def act_rpm_to_act_robot_vel():
 
 
 def robotVel2WheelRPM():
-    V  = input(" Linear Velocity (meter per second): ")
-    W  = input(" Angular Velocity (rad per second) : ")
-    L_ = input(" Distance between 2 wheels(cm)     : ")
-    d_ = input(" Wheel Diameter        (cm)        : ")
+    V  = float(input(" Linear Velocity (meter per second): "))
+    W  = float(input(" Angular Velocity (rad per second) : "))
+    L_ = float(input(" Distance between 2 wheels(cm)     : "))
+    d_ = float(input(" Wheel Diameter        (cm)        : "))
 
     # centimeter to Meter
     #L = L_ * 0.01
@@ -123,5 +125,27 @@ def robotVel2WheelRPM():
 
 def cm2Meter(x):
     return x*0.01
+
+def ZNpidControl():
+    KpPrime = float(input("Enter Kp' = "))
+    Tc = float(input("Enter Tc in seconds = "))
+    Kp = KpPrime*0.6
+    Ki = Tc/2
+    Kd = Tc/8
+
+    print("\n")
+    print("                 RESULT TABLE")
+    print("==============================================")
+    print("  INPUT                    | unit |           ")
+    print("----------------------------------------------")
+    print(" Kp Prime                           ", KpPrime)
+    print(" Tc                        |  s  |  ", Tc      )
+    print("______________________________________________")
+    print("  OUTPUT                                      ")
+    print("----------------------------------------------")
+    print(" Kp                  =====>  ", Kp)
+    print(" Ki                  =====>  ", Ki)
+    print(" Kd                  =====>  ", Kd)
+    print("==============================================")
 if __name__ == "__main__":
     main()
