@@ -21,8 +21,8 @@ def main():
             sys.exit()
 
 def act_rpm_to_act_robot_vel():
-    Vr = float(input(" Right wheel              ( rpm )  : "))
-    Vl = float(input(" Left wheel               ( rpm )  : "))
+    Vr_ = float(input(" Right wheel              ( rpm )  : "))
+    Vl_ = float(input(" Left wheel               ( rpm )  : "))
     L_ = float(input(" Distance between 2 wheels( cm  )  : "))
     d_ = float(input(" Wheel Diameter           ( cm  )  : "))
     dt = float(input(" Time difference                   : "))
@@ -33,8 +33,8 @@ def act_rpm_to_act_robot_vel():
     # rpm to meter per second
     # Vr = Vr * (rev/1 min) x (1 min/60s) x (pi*d/1 rev) = ms
     # Vl = Vl * (rev/1 min) x (1 min/60s) x (pi*d/1 rev) = ms
-    Vr = Vr * pi * d /60.0
-    Vl = Vl * pi * d /60.0
+    Vr = Vr_ * pi * d /60.0
+    Vl = Vl_ * pi * d /60.0
 
     # ave_rpm = Vr + Vl / 2 = rpm
     # ave_rpm = (Vr + Vl) /2.0
@@ -58,8 +58,8 @@ def act_rpm_to_act_robot_vel():
     print("==============================================")
     print(" INPUT                     | unit |           ")
     print("----------------------------------------------")
-    print(" Right wheel RPM           | rpm  |  ", Vr)
-    print(" Left  wheel RPM           | rpm  |  ", Vl)
+    print(" Right wheel RPM           | rpm  |  ", Vr_)
+    print(" Left  wheel RPM           | rpm  |  ", Vl_)
     print(" Distance between 2 wheels |  cm  |  ",L_ )
     print(" Wheel Diameter            |  cm  |  ",d_ )
     print(" Delta t                   |   s  |  ", dt)
