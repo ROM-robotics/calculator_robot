@@ -101,8 +101,8 @@ def robotVel2WheelRPM():
     wr = Vr / (d/2.0)
 
     # 3) radian per second to rev per min
-    wl = ( wl * 60.0 ) / ( 2.0 * pi )
-    wr = ( wr * 60.0 ) / ( 2.0 * pi )
+    wl_ = ( wl * 60.0 ) / ( 2.0 * pi )
+    wr_ = ( wr * 60.0 ) / ( 2.0 * pi )
 
     # Shortened
     #wl = Vl * 60.0 / ( pi * d )
@@ -119,8 +119,12 @@ def robotVel2WheelRPM():
     print("______________________________________________")
     print("  OUTPUT                                      ")
     print("----------------------------------------------")
-    print(" Right wheel RPM     =====>| rpm  |  ", wr)
-    print(" Left  wheel RPM     =====>| rpm  |  ", wl)
+    print(" Right wheel   =====>   |   original   |  ", Vr)
+    print(" Left  wheel   =====>   |   original   |  ", Vl)
+    print(" Right wheel   =====>   | rad_per_sec  |  ", wr)
+    print(" Left  wheel   =====>   | rad_per_sec  |  ", wl)
+    print(" Right wheel   =====>   |     rpm      |  ", wr_)
+    print(" Left  wheel   =====>   |     rpm      |  ", wl_)
     print("==============================================")
 
 def cm2Meter(x):
