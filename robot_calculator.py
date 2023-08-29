@@ -4,7 +4,7 @@ from math import pi
 def main():
     
         print("===================================================")
-        print(" 1) Calculate RobotVelocity to wheel rpm ")
+        print(" 1) Calculate RobotVelocity to wheel velocity(rad/s) ")
         print(" 2) Ziegler Nichols PID Gains ")
         print(" 3) Calculate actual rpm to actual RobotVelocity")
         print("===================================================")
@@ -77,14 +77,14 @@ def act_rpm_to_act_robot_vel():
 def robotVel2WheelRPM():
     V  = float(input(" Linear Velocity (meter per second): "))
     W  = float(input(" Angular Velocity (rad per second) : "))
-    L_ = float(input(" Distance between 2 wheels(cm)     : "))
-    d_ = float(input(" Wheel Diameter        (cm)        : "))
+    L_ = float(input(" Distance between 2 wheels(m)     : "))
+    r_ = float(input(" Wheel Radius        (m)        : "))
 
     # centimeter to Meter
     #L = L_ * 0.01
     #d = d_ * 0.01
-    L = cm2Meter(L_)
-    d = cm2Meter(d_)
+    L = L_ * 1.0
+    r = r_ * 1.0
 
     # 1) Robot Velocity to Left Wheel Right Wheel Velocity
     # linear_velocity = V = (2 * pi * R)/ T
@@ -97,12 +97,12 @@ def robotVel2WheelRPM():
 
     # 2) wheel linear_velocity to wheel angular_velocity
     # radian per second
-    wl = Vl / (d/2.0)
-    wr = Vr / (d/2.0)
+    wl = Vl / r 
+    wr = Vr / r
 
-    # 3) radian per second to rev per min
-    wl_ = ( wl * 60.0 ) / ( 2.0 * pi )
-    wr_ = ( wr * 60.0 ) / ( 2.0 * pi )
+    # # 3) radian per second to rev per min
+    # wl_ = ( wl * 60.0 ) / ( 2.0 * pi )
+    # wr_ = ( wr * 60.0 ) / ( 2.0 * pi )
 
     # Shortened
     #wl = Vl * 60.0 / ( pi * d )
@@ -115,16 +115,13 @@ def robotVel2WheelRPM():
     print(" Linear Velocity           |  ms  |  ", V      )
     print(" Angular Velocity          |  rs  |  ", W      )
     print(" Distance between 2 wheels |  cm  |  ",L_      )
-    print(" Wheel Diameter            |  cm  |  ",d_      )
+    print(" Wheel Radius              |  cm  |  ",r_      )
     print("______________________________________________")
     print("  OUTPUT                                      ")
     print("----------------------------------------------")
-    print(" Right wheel   =====>   |  Vr formula  |  ", Vr)
-    print(" Left  wheel   =====>   |  Vl formula  |  ", Vl)
     print(" Right wheel   =====>   | rad_per_sec  |  ", wr)
     print(" Left  wheel   =====>   | rad_per_sec  |  ", wl)
-    print(" Right wheel   =====>   |     rpm      |  ", wr_)
-    print(" Left  wheel   =====>   |     rpm      |  ", wl_)
+
     print("==============================================")
 
 def cm2Meter(x):
